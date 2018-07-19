@@ -1,0 +1,20 @@
+\documentclass{exam}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{graphicx}
+\pagestyle{headandfoot}
+\headrule
+\firstpageheader{CLASSNAME
+                 EXAMNAME DATE}{}{\large\bfseries Name:\enspace\makebox[2in]{\hrulefill}}
+\runningheader{\ifcontinuation{Question \ContinuedQuestion\ continues}}
+{}
+{EXAMNAME}
+\firstpagefooter{}{}{}
+\runningfooter{}{\thepage\ / \numpages}
+\renewcommand{\thechoice}{\alph{choice}}
+\renewcommand{\choicelabel}{\thechoice.}
+\setlist[enumerate, 0]{label=\alph*), nosep}
+\setlength\answerskip{0ex}
+\begin{document}
+\begin{questions}
