@@ -102,3 +102,12 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+#output/input
+*.pdf
+*.txt
+*.?.tex
+*.png
+
+#editor
+.vscode
