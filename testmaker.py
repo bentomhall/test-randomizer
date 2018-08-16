@@ -12,6 +12,7 @@ parser.add_argument('-s', '--subject', dest='subject', nargs='?',
 parser.add_argument('-n', '--name', dest='name', nargs='?', action='store', default='',
                     help='The name of the assessment, to be printed in the header.')
 parser.add_argument('-d', '--date', nargs='?', action='store', default='', help="The date of the assessment.")
+parser.add_argument('-c', '--condensed', action='store_true', default=False, help="Use condensed output for multiple-choice. Default: each option on a new line (false)")
 parser.add_argument('-v', '--verbose', 
                     action='store_true', default=False, 
                     help="print diagnostic information about the parsing process and exit after parsing.")
@@ -28,7 +29,7 @@ if args.date == '':
 
 i = 0
 while i < args.permute:
-    fname = test_writer.main(args.filename, args.subject, args.name, args.date, index=i, condensed=True, verbose=args.verbose)
+    fname = test_writer.main(args.filename, args.subject, args.name, args.date, index=i, condensed=args.condensed, verbose=args.verbose)
     call(["latexmk.exe","-quiet", "-pdf", fname])
     i += 1
 #call(["latexmk.exe", "-c"])
