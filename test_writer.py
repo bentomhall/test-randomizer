@@ -1,7 +1,7 @@
 #! /Library/Frameworks/Python.framework/Versions/3.6/bin/python3
 import re
 import assignmentparser
-import sys
+import sys, os
 
 class TestWriter(object):
     def __init__(self, assessment, condense_MC):
@@ -16,8 +16,8 @@ class TestWriter(object):
 
     def format_mc_question(self, question, value):
         text, answers = question.data()
-        text[-1] += "\\\\" #insert linebreak after last part of question
-        output = ["\\question[{0}]".format(value)]
+        #text[-1] += "\\\\" #insert linebreak after last part of question
+        output = ["\\question"]
         output.extend(text)
         output.append("\\begin{{{0}}}".format(self.question_environment))
         output.extend([self.format_answer(answer) for answer in answers])
@@ -96,7 +96,7 @@ def write(filename, text):
     return
 
 def main(input_file, subject, exam_name, date, index=0, condensed=False, verbose=False):
-    template = load_template("assessment.template.tex", subject, exam_name, date)
+    template = load_template("assessment.template.tex", subject, exam_name, date, index)
     parser = assignmentparser.Parser(verbose)
     with open(input_file, 'r') as ifile:
         text = ifile.readlines()
@@ -113,9 +113,10 @@ def main(input_file, subject, exam_name, date, index=0, condensed=False, verbose
 def format_filename(base, index):
     return "{0}.{1}.tex".format(base[:-4], index)
 
-def load_template(filename, subject, examname, date):
+def load_template(filename, subject, examname, date, index):
     with open(filename, 'r') as template_file:
         text = template_file.read()
+        text = text.replace('CODE', str(index+1))
         text = text.replace('CLASSNAME', "\\large \\bfseries {0}\\\\".format(subject) if subject else "")
         text = text.replace('EXAMNAME', examname)
         text = text.replace(' DATE', ", {}".format(date) if date else "")
