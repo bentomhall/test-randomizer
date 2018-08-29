@@ -1,7 +1,7 @@
 import argparse
 import test_writer
 from subprocess import call
-import sys
+import sys,os
 
 parser = argparse.ArgumentParser(description="Create a set of permuted assessments in pdf format")
 parser.add_argument('filename', metavar='input', help='the path to the text file containing the assessment data')
@@ -28,8 +28,9 @@ if args.date == '':
     args.date = input("What is the date of the assessment (<enter> for no date)? ")
 
 i = 0
+latex = {"posix": "latexmk", "nt": "latexmk.exe"}
 while i < args.permute:
     fname = test_writer.main(args.filename, args.subject, args.name, args.date, index=i, condensed=args.condensed, verbose=args.verbose)
-    call(["latexmk.exe","-quiet", "-pdf", fname])
+    call([latex[os.name],"-quiet", "-pdf", fname])
     i += 1
 #call(["latexmk.exe", "-c"])
