@@ -95,20 +95,36 @@ def write(filename, text):
         ofile.write(text)
     return
 
-def main(input_file, subject, exam_name, date, index=0, condensed=False, verbose=False):
+def main(input_file, subject, exam_name, date, index=0, condensed=False, verbose=False, includeFile=None):
     template = load_template("assessment.template.tex", subject, exam_name, date, index)
+    fname = format_filename(input_file, index)
     parser = assignmentparser.Parser(verbose)
     with open(input_file, 'r') as ifile:
         text = ifile.readlines()
         parser.parse(text)
     writer = TestWriter(parser, condensed)
+    output = write_test(fname, index, writer, template, includeFile)
+    make_key(fname, index, data)
+    return fname
+
+def include_file(file, index):
+    pass
+
+def make_key(fname, index, data):
+    name = "{0}.key.tex".format(fname[:-4])
+    data[0] = "\documentclass[answers]{exam}"
+    write(name, '\n'.join(data))
+    return
+
+def write_test(fname, index, parser, template, include=None):
     output = [template]
     output.extend(writer.marshal())
     output.append('\\end{questions}')
+    if include:
+        output.append(include_file(include, index))
     output.append('\\end{document}')
-    fname = format_filename(input_file, index)
     write(fname, '\n'.join(output) )
-    return fname
+    return output
 
 def format_filename(base, index):
     return "{0}.{1}.tex".format(base[:-4], index)
