@@ -104,21 +104,21 @@ def main(input_file, subject, exam_name, date, index=0, condensed=False, verbose
         parser.parse(text)
     writer = TestWriter(parser, condensed)
     output = write_test(fname, index, writer, template, includeFile)
-    make_key(fname, index, data)
-    return fname
+    key_name = make_key(fname, index, output)
+    return fname, key_name
 
 def include_file(file, index):
     pass
 
 def make_key(fname, index, data):
     name = "{0}.key.tex".format(fname[:-4])
-    data[0] = "\documentclass[answers]{exam}"
+    data[0] = data[0].replace(r"\documentclass{exam}",r"\documentclass[answers]{exam}")
     write(name, '\n'.join(data))
-    return
+    return name
 
 def write_test(fname, index, parser, template, include=None):
     output = [template]
-    output.extend(writer.marshal())
+    output.extend(parser.marshal())
     output.append('\\end{questions}')
     if include:
         output.append(include_file(include, index))
