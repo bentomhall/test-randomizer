@@ -108,6 +108,8 @@ venv.bak/
 *.txt
 *.?.tex
 *.png
+./physics/
+./chemistry/
 
 #editor
 .vscode
