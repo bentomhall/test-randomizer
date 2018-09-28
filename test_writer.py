@@ -40,7 +40,7 @@ class TestWriter(object):
     def format_question_part(self, text):
         output = ["\\part"]
         output.append(text)
-        output.append("\\vspace*{1in}")
+        #output.append("\\vspace*{1in}")
         return "\n".join(output)+"\n"
 
     def format_answer(self, answer):
@@ -82,6 +82,9 @@ class TestWriter(object):
         if title == "":
             return "\n"
         else:
+            t, info = title.split('\\',1)
+            if info:
+                return "\\fullwidth{{\Large {{\\textbf{{{0}}}}} \\\\ \\textit{{{1}}}}}".format(t, info)
             return "\\fullwidth{{\\Large \\textbf{{{0}}}}}".format(title)
 
     def marshal(self):

@@ -107,9 +107,11 @@ venv.bak/
 *.pdf
 *.txt
 *.?.tex
+*.key.tex
 *.png
 ./physics/
 ./chemistry/
+*.gz
 
 #editor
 .vscode

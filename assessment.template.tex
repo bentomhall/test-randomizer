@@ -7,7 +7,8 @@
 \pagestyle{headandfoot}
 \headrule
 \firstpageheader{CLASSNAME
-                 EXAMNAME DATE}{Form Code CODE}{\large\bfseries Name:\enspace\makebox[2in]{\hrulefill}}
+                 EXAMNAME DATE}{Form Code CODE}{\large\bfseries Name:\enspace\makebox[1.5in]{\hrulefill} \\
+                                                \large\bfseries Signature:\enspace\makebox[1.5in]{\hrulefill}}
 \runningheader{\ifcontinuation{Question \ContinuedQuestion\ continues}}
 {}
 {EXAMNAME}
@@ -15,6 +16,7 @@
 \runningfooter{}{\thepage\ / \numpages}
 \renewcommand{\thechoice}{\alph{choice}}
 \renewcommand{\choicelabel}{\thechoice.}
+\renewcommand{\questionlabel}{\enspace\makebox[0.5in]{\hrulefill} \thequestion}
 \setlist[enumerate, 0]{label=\alph*), nosep}
 \setlength\answerskip{0ex}
 \begin{document}
