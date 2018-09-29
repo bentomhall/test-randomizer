@@ -16,7 +16,9 @@
 \runningfooter{}{\thepage\ / \numpages}
 \renewcommand{\thechoice}{\alph{choice}}
 \renewcommand{\choicelabel}{\thechoice.}
-\renewcommand{\questionlabel}{\enspace\makebox[0.5in]{\hrulefill} \thequestion}
+%\renewcommand{\questionlabel}{\enspace\makebox[0.5in]{\hrulefill} \thequestion}
+\newcommand{\answerbox}{\rule{1in}{1in}}
+\newcommand{\answerblank}{\enspace\makebox[0.5in]\hrulefill}
 \setlist[enumerate, 0]{label=\alph*), nosep}
 \setlength\answerskip{0ex}
 \begin{document}

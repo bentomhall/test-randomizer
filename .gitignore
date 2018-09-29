@@ -112,6 +112,7 @@ venv.bak/
 ./physics/
 ./chemistry/
 *.gz
+*.jpg
 
 #editor
 .vscode

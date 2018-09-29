@@ -18,6 +18,7 @@ class TestWriter(object):
         text, answers = question.data()
         #text[-1] += "\\\\" #insert linebreak after last part of question
         output = ["\\question"]
+        text.insert(0, "\\answerblank ")
         output.extend(text)
         output.append("\\begin{{{0}}}".format(self.question_environment))
         output.extend([self.format_answer(answer) for answer in answers])
@@ -35,7 +36,7 @@ class TestWriter(object):
 
     def format_single_question(self, question, value):
         text = question.data()[0]
-        return "\\question {0}\n".format("\n".join(text))
+        return "\\question \\answerblank {0}\n".format("\n".join(text))
     
     def format_question_part(self, text):
         output = ["\\part"]

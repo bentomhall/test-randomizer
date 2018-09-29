@@ -33,7 +33,7 @@ i = 0
 latex = {"posix": "latexmk", "nt": "latexmk.exe"}
 while i < args.permute:
     fname, key_name = test_writer.main(args.filename, args.subject, args.name, args.date, index=i, condensed=args.condensed, verbose=args.verbose, includeFile=args.include)
-    call([latex[os.name],"-quiet", "-pdf", fname])
-    call([latex[os.name], "-quiet", "-pdf", key_name])
+    #call([latex[os.name],"-quiet", "-pdf", fname])
+    #call([latex[os.name], "-quiet", "-pdf", key_name])
     i += 1
 #call(["latexmk.exe", "-c"])
