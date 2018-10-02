@@ -4,10 +4,11 @@ import assignmentparser
 import sys, os
 
 class TestWriter(object):
-    def __init__(self, assessment, condense_MC):
+    def __init__(self, assessment, condense_MC, show_answerblank=False):
         self.assessment = assessment
         self.total_questions = assessment.total
         self.sections = len(assessment._sections)
+        self.show_blank = show_answerblank
         if condense_MC:
             self.question_environment = "oneparchoices"
         else:
@@ -18,7 +19,8 @@ class TestWriter(object):
         text, answers = question.data()
         #text[-1] += "\\\\" #insert linebreak after last part of question
         output = ["\\question"]
-        text.insert(0, "\\answerblank ")
+        if self.show_blank:
+            text.insert(0, "\\answerblank ")
         output.extend(text)
         output.append("\\begin{{{0}}}".format(self.question_environment))
         output.extend([self.format_answer(answer) for answer in answers])
@@ -36,7 +38,9 @@ class TestWriter(object):
 
     def format_single_question(self, question, value):
         text = question.data()[0]
-        return "\\question \\answerblank {0}\n".format("\n".join(text))
+        if self.show_blank:
+            text.insert(0, "\\answerblank")
+        return "\\question {0}\n".format("\n".join(text))
     
     def format_question_part(self, text):
         output = ["\\part"]
@@ -99,14 +103,14 @@ def write(filename, text):
         ofile.write(text)
     return
 
-def main(input_file, subject, exam_name, date, index=0, condensed=False, verbose=False, includeFile=None):
+def main(input_file, subject, exam_name, date, index=0, condensed=False, verbose=False, includeFile=None, showBlank=False):
     template = load_template("assessment.template.tex", subject, exam_name, date, index)
     fname = format_filename(input_file, index)
     parser = assignmentparser.Parser(verbose)
     with open(input_file, 'r') as ifile:
         text = ifile.readlines()
         parser.parse(text)
-    writer = TestWriter(parser, condensed)
+    writer = TestWriter(parser, condensed, show_answerblank=showBlank)
     output = write_test(fname, index, writer, template, includeFile)
     key_name = make_key(fname, index, output)
     return fname, key_name

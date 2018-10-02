@@ -18,6 +18,7 @@ parser.add_argument('-v', '--verbose',
                     action='store_true', default=False, 
                     help="print diagnostic information about the parsing process and exit after parsing.")
 parser.add_argument('-i', '--include', action="store", default=None, help="Include a pdf file in each output. files should be base_name.n.pdf, where base_name is the argument here.")
+parser.add_argument('--showBlank', action="store_true", default=False, help="show answer blank for MC and matching questions.")
 args = parser.parse_args()
 
 if args.subject == '':
@@ -32,7 +33,7 @@ if args.date == '':
 i = 0
 latex = {"posix": "latexmk", "nt": "latexmk.exe"}
 while i < args.permute:
-    fname, key_name = test_writer.main(args.filename, args.subject, args.name, args.date, index=i, condensed=args.condensed, verbose=args.verbose, includeFile=args.include)
+    fname, key_name = test_writer.main(args.filename, args.subject, args.name, args.date, index=i, condensed=args.condensed, verbose=args.verbose, includeFile=args.include, showBlank=args.showBlank)
     #call([latex[os.name],"-quiet", "-pdf", fname])
     #call([latex[os.name], "-quiet", "-pdf", key_name])
     i += 1
