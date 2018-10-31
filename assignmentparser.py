@@ -86,6 +86,7 @@ class Question(object):
     def is_multipart(self):
         return not self.is_multiple_choice() and len(self._question) > 1 and not self._verbatim
 
+
 class Answer(object):
     def __init__(self, text, is_correct):
         self.text = text

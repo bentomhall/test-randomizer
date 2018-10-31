@@ -117,3 +117,5 @@ venv.bak/
 #editor
 .vscode
 .DS_Store
+*.gdoc
+*.fls

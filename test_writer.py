@@ -38,8 +38,8 @@ class TestWriter(object):
 
     def format_single_question(self, question, value):
         text = question.data()[0]
-        if self.show_blank:
-            text.insert(0, "\\answerblank")
+#        if self.show_blank and not question._shuffle:
+#            text.insert(0, "\\answerblank")
         return "\\question {0}\n".format("\n".join(text))
     
     def format_question_part(self, text):
@@ -89,8 +89,8 @@ class TestWriter(object):
         else:
             t, info = title.split('\\',1)
             if info:
-                return "\\fullwidth{{\Large {{\\textbf{{{0}}}}} \\\\ \\textit{{{1}}}}}".format(t, info)
-            return "\\fullwidth{{\\Large \\textbf{{{0}}}}}".format(title)
+                return "\\pagebreak[1] \\fullwidth{{\large {{\\textbf{{{0}}}}} \\\\ \\textit{{{1}}}}}".format(t, info)
+            return "\\pagebreak[1] \\fullwidth{{\\large \\textbf{{{0}}}}}".format(title)
 
     def marshal(self):
         output = []
