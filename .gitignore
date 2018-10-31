@@ -119,3 +119,4 @@ venv.bak/
 .DS_Store
 *.gdoc
 *.fls
+.DS_Store

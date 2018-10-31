@@ -87,7 +87,10 @@ class TestWriter(object):
         if title == "":
             return "\n"
         else:
-            t, info = title.split('\\',1)
+            try:
+                t, info = title.split('\\',1)
+            except:
+                info = None
             if info:
                 return "\\pagebreak[1] \\fullwidth{{\large {{\\textbf{{{0}}}}} \\\\ \\textit{{{1}}}}}".format(t, info)
             return "\\pagebreak[1] \\fullwidth{{\\large \\textbf{{{0}}}}}".format(title)
