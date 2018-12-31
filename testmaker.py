@@ -1,6 +1,6 @@
 import sys,os
 import argparse
-import test_writer
+import testwriter
 from subprocess import call
 
 
@@ -32,9 +32,8 @@ if args.date == '':
 
 i = 0
 latex = {"posix": "latexmk", "nt": "latexmk.exe"}
+script_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
+print(script_directory)
 while i < args.permute:
-    fname, key_name = test_writer.main(args.filename, args.subject, args.name, args.date, index=i, condensed=args.condensed, verbose=args.verbose, includeFile=args.include, showBlank=args.showBlank)
-    #call([latex[os.name],"-quiet", "-pdf", fname])
-    #call([latex[os.name], "-quiet", "-pdf", key_name])
+    fname, key_name = testwriter.main(args.filename, args.subject, args.name, args.date, index=i, condensed=args.condensed, verbose=args.verbose, includeFile=args.include, showBlank=args.showBlank, scriptDir=script_directory)
     i += 1
-#call(["latexmk.exe", "-c"])
