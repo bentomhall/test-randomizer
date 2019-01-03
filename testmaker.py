@@ -33,7 +33,6 @@ if args.date == '':
 i = 0
 latex = {"posix": "latexmk", "nt": "latexmk.exe"}
 script_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
-print(script_directory)
 while i < args.permute:
     fname, key_name = testwriter.main(args.filename, args.subject, args.name, args.date, index=i, condensed=args.condensed, verbose=args.verbose, includeFile=args.include, showBlank=args.showBlank, scriptDir=script_directory)
     i += 1
